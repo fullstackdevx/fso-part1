@@ -15,19 +15,21 @@ const Statistics = ({ good, neutral, bad }) => {
   }
 
   return (
-    <>
-      <Statistic text="good" value={good} />
-      <Statistic text="neutral" value={neutral} />
-      <Statistic text="bad" value={bad} />
+    <table>
+      <tbody>
+        <Statistic text="good" value={good} />
+        <Statistic text="neutral" value={neutral} />
+        <Statistic text="bad" value={bad} />
 
-      <Statistic text="all" value={all()} />
-      <Statistic text="average" value={averageScore()} />
-      <Statistic text="positive" value={positivePercentage()} />
-    </>
+        <Statistic text="all" value={all()} />
+        <Statistic text="average" value={averageScore()} />
+        <Statistic text="positive" value={positivePercentage()} />
+      </tbody>
+    </table>
   )
 }
 
-const Statistic = ({ text, value }) => <p>{text} {value} {text === "positive" ? "%" : ""}</p>
+const Statistic = ({ text, value }) => <tr><th>{text}</th><td>{value} {text === "positive" ? "%" : ""}</td></tr>
 
 const Button = ({ text, handleClick }) => <button onClick={handleClick}>{text}</button>
 
