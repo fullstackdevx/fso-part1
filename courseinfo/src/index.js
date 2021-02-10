@@ -1,29 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const Header = ({ course }) => {
-  return (<h1>{course}</h1>)
-}
+const Header = ({ course }) => (<h1>{course}</h1>)
 
 const Content = ({ parts }) => {
   const [part1, part2, part3] = parts
   return (
     <div>
-      <Part name={part1.name} exercises={part1.exercises} />
-      <Part name={part2.name} exercises={part2.exercises} />
-      <Part name={part3.name} exercises={part3.exercises} />
+      <Part part={part1} />
+      <Part part={part2} />
+      <Part part={part3} />
     </div>
   )
 }
 
-const Part = ({ name, exercises }) => {
-  return (<p>{name} {exercises}</p>)
-}
+const Part = ({ part }) => (<p>{part.name} {part.exercises}</p>)
 
-const Total = ({ parts }) => {
-  const total = parts.reduce((accum, part) => accum + part.exercises, 0)
-  return (<p>Number of exercises {total}</p>)
-}
+const Total = ({ parts }) => (<p>Number of exercises {parts.reduce((accum, part) => accum + part.exercises, 0)}</p>)
 
 const App = () => {
   const course = {
