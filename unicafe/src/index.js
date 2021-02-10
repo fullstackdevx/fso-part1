@@ -10,6 +10,10 @@ const Statistics = ({ good, neutral, bad }) => {
   const averageScore = () => all() === 0 ? 0 : (good * GOOD_AVERAGE_WEIGHT + neutral * NEUTRAL_AVERAGE_WEIGHT + bad * BAD_AVERAGE_WEIGHT) / all()
   const positivePercentage = () => all() === 0 ? 0 : good * 100 / all()
 
+  if (all() === 0) {
+    return <p>No feedback given</p>
+  }
+
   return (
     <>
       <p>good {good}</p>
