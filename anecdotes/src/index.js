@@ -17,12 +17,24 @@ const App = (props) => {
     setPoints(copy)
   }
 
+  const largestNumberOfVotes = () => Math.max(...points)
+
+  const mostVotedAnecdote = () => {
+    const index = points.indexOf(largestNumberOfVotes())
+    return props.anecdotes[index];
+  }
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {props.anecdotes[selected]}
       <p>has {points[selected]} votes</p>
       <Button handleClick={voteSelected} text="vote" />
       <Button handleClick={setRandomAnecdote} text="next anecdote" />
+
+      <h1>Anecdote with most votes</h1>
+      <p>{mostVotedAnecdote()}</p>
+      <p>has {largestNumberOfVotes()} votes</p>
     </div>
   )
 }
