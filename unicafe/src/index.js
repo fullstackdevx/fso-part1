@@ -6,27 +6,27 @@ const NEUTRAL_AVERAGE_WEIGHT = 0
 const BAD_AVERAGE_WEIGHT = -1
 
 const Statistics = ({ good, neutral, bad }) => {
-  const all = () => good + neutral + bad
-  const averageScore = () => all() === 0 ? 0 : (good * GOOD_AVERAGE_WEIGHT + neutral * NEUTRAL_AVERAGE_WEIGHT + bad * BAD_AVERAGE_WEIGHT) / all()
-  const positivePercentage = () => all() === 0 ? 0 : good * 100 / all()
+  const all = good + neutral + bad
+  const averageScore = all === 0 ? 0 : (good * GOOD_AVERAGE_WEIGHT + neutral * NEUTRAL_AVERAGE_WEIGHT + bad * BAD_AVERAGE_WEIGHT) / all
+  const positivePercentage = all === 0 ? 0 : good * 100 / all
+  const isfeedBackGiven = all !== 0
 
-  if (all() === 0) {
-    return <p>No feedback given</p>
+  if (isfeedBackGiven) {
+    return (
+      <table>
+        <tbody>
+          <Statistic text="good" value={good} />
+          <Statistic text="neutral" value={neutral} />
+          <Statistic text="bad" value={bad} />
+
+          <Statistic text="all" value={all} />
+          <Statistic text="average" value={averageScore} />
+          <Statistic text="positive" value={positivePercentage} />
+        </tbody>
+      </table>
+    )
   }
-
-  return (
-    <table>
-      <tbody>
-        <Statistic text="good" value={good} />
-        <Statistic text="neutral" value={neutral} />
-        <Statistic text="bad" value={bad} />
-
-        <Statistic text="all" value={all()} />
-        <Statistic text="average" value={averageScore()} />
-        <Statistic text="positive" value={positivePercentage()} />
-      </tbody>
-    </table>
-  )
+  return <p>No feedback given</p>
 }
 
 const Statistic = ({ text, value }) => <tr><th>{text}</th><td>{value} {text === "positive" ? "%" : ""}</td></tr>
